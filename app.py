@@ -28,7 +28,7 @@ y = dataset.iloc[:, -1].values
 # Encoding the Independent Variables
 ct = ColumnTransformer(transformers = [('encoder', OneHotEncoder(sparse_output=False), [2, 3, 6, 7])], remainder = 'passthrough')
 X = np.array(ct.fit_transform(X))
-#X= X.astype('int')
+X= X.astype('int')
 
 # Encoding the Dependent Variable
 le = LabelEncoder()
