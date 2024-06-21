@@ -89,27 +89,27 @@ def main():
     st.markdown("To determine whether a customer is worth issuing a credit card or not, please **ENTER** the AGE INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, and LOANS:")
     col1, col2, col3 = st.columns(3)
     with col1:
-    AGE = st.number_input("AGE")
+        AGE = st.number_input("AGE")
     with col2:
-    INCOME = st.number_input("INCOME")
+        INCOME = st.number_input("INCOME")
     with col3:
-    GENDER = st.text_input("GENDER (Please enter 'm' for male and 'f' for female)")
+        GENDER = st.text_input("GENDER (Please enter 'm' for male and 'f' for female)")
     
     col4, col5, col6 = st.columns(3)
     with col4:
-    MARITAL = st.text_input("MARITAL STATUS (Please enter one of the following options: 'single', 'married', or 'divsepwid')")
+        MARITAL = st.text_input("MARITAL STATUS (Please enter one of the following options: 'single', 'married', or 'divsepwid')")
     with col5:
-    NUMKIDS = st.number_input("Number of dependent children")
+        NUMKIDS = st.number_input("Number of dependent children")
     with col6:
-    NUMCARDS = st.number_input("Number of credit cards excluding store credit cards")
+        NUMCARDS = st.number_input("Number of credit cards excluding store credit cards")
 
     col7, col8, col9 =st.columns(3)
     with col7:
-    HOWPAID = st.text_input("How often is customer paid by employer (weekly or monthly)")
+        HOWPAID = st.text_input("How often is customer paid by employer (weekly or monthly)")
     with col8:
-    MORTGAGE = st.text_input("Does customer have a mortgage? please enter 'y' for yes or 'n' for no")
+        MORTGAGE = st.text_input("Does customer have a mortgage? please enter 'y' for yes or 'n' for no")
     with col9:
-    STORECAR = st.number_input("Number of store credit cards")
+        STORECAR = st.number_input("Number of store credit cards")
 
     LOANS = st.number_input("Number of outstanding loans")  
     result = ""
