@@ -22,6 +22,7 @@ from PIL import Image
 dataset_name = "saifhmb/CreditCardRisk"
 dataset = load_dataset(dataset_name, split = 'train')
 dataset = pd.DataFrame(dataset)
+dataset['MARITAL'] = dataset['MARITAL'].str.replace(' ', '')
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
