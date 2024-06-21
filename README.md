@@ -8,5 +8,5 @@ sdk_version: 1.36.0
 app_file: app.py
 pinned: false
 ---
-# saifhmb-Credit-Card-Risk-Assessment-App
+# Credit-Card-Risk-Assessment-App
 Hugging Face ML Deployment of Streamlit App
