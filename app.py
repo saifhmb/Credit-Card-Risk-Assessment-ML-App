@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder, StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_score, recall_score, classification_report
-from transformers import Trainer, TrainingArguments
+#from transformers import Trainer, TrainingArguments
 from skops import hub_utils
 import pickle
 from skops.card import Card, metadata_from_config
