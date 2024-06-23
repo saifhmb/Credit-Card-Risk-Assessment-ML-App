@@ -22,13 +22,13 @@ from PIL import Image
 dataset_name = "saifhmb/CreditCardRisk"
 dataset = load_dataset(dataset_name, split = 'train')
 dataset = pd.DataFrame(dataset)
-dataset['GENDER'] = dataset['GENDER'].str.replace(' ', '')
+
 dataset['GENDER'] = dataset['GENDER'].replace(['n', 'y'], [0, 1], inplace = True)
-dataset['MARITAL'] = dataset['MARITAL'].str.replace(' ', '')
+
 dataset['MARITAL'] = dataset['MARITAL'].replace(['married', 'single', 'divsepwid'], [0, 1, 2], inplace = True)
-dataset['HOWPAID'] = dataset['HOWPAID'].str.replace(' ', '')
+
 dataset['HOWPAID'] = dataset['HOWPAID'].replace(['n', 'y'], [0, 1], inplace = True)
-dataset['MORTGAGE'] = dataset['MORTGAGE'].replace(' ', '')
+
 dataset['MORTGAGE'] = dataset['MORTGAGE'].replace(['weekly', 'monthly'], [0, 1], inplace = True)
 dataset = dataset.drop(['ID'], axis = 1)
 X = dataset.iloc[:, :-1].values
