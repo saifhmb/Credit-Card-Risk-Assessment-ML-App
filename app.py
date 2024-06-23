@@ -23,11 +23,12 @@ dataset_name = "saifhmb/CreditCardRisk"
 dataset = load_dataset(dataset_name, split = 'train')
 dataset = pd.DataFrame(dataset)
 dataset['MARITAL'] = dataset['MARITAL'].str.replace(' ', '')
+dataset['MARITAL'] = dataset['MARITAL'].replace(['married', 'single', 'divsepwid'], [0, 1, 2], inplace = True)
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
 # Encoding the Independent Variables
-ct = ColumnTransformer(transformers = [('encoder', OneHotEncoder(sparse_output=False, max_categories = 3), [2, 3, 6, 7])], remainder = 'passthrough')
+ct = ColumnTransformer(transformers = [('encoder', OneHotEncoder(sparse_output=False), [2, 3, 6, 7])], remainder = 'passthrough')
 X = np.array(ct.fit_transform(X))
 #X= X.astype('int')
 
