@@ -24,6 +24,7 @@ dataset = load_dataset(dataset_name, split = 'train')
 dataset = pd.DataFrame(dataset)
 dataset['MARITAL'] = dataset['MARITAL'].str.replace(' ', '')
 dataset['MARITAL'] = dataset['MARITAL'].replace(['married', 'single', 'divsepwid'], [0, 1, 2], inplace = True)
+dataset['HOWPAID'] = dataset['HOWPAID'].replace(['n', 'y'], [0, 1], inplace = True)
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
