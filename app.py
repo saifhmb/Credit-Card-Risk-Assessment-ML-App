@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder, StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_score, recall_score, classification_report
-#from transformers import Trainer, TrainingArguments
+from transformers import Trainer, TrainingArguments
 from skops import hub_utils
 import pickle
 from skops.card import Card, metadata_from_config
@@ -23,21 +23,16 @@ dataset_name = "saifhmb/CreditCardRisk"
 dataset = load_dataset(dataset_name, split = 'train')
 dataset = pd.DataFrame(dataset)
 
-dataset['GENDER'] = dataset['GENDER'].replace(['n', 'y'], [0, 1], inplace = True)
-
-dataset['MARITAL'] = dataset['MARITAL'].replace(['married', 'single', 'divsepwid'], [0, 1, 2], inplace = True)
-
-dataset['HOWPAID'] = dataset['HOWPAID'].replace(['n', 'y'], [0, 1], inplace = True)
-
-dataset['MORTGAGE'] = dataset['MORTGAGE'].replace(['weekly', 'monthly'], [0, 1], inplace = True)
 dataset = dataset.drop(['ID'], axis = 1)
-X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
+dataset = dataset.drop(['RISK'], axis = 1)
 
-# Encoding the Independent Variables
-ct = ColumnTransformer(transformers = [('encoder', OneHotEncoder(sparse_output=False), [2, 6])], remainder = 'passthrough')
-X = np.array(ct.fit_transform(X))
-#X= X.astype('int')
+# Encoding the Independent Variables and Applying Feature Scaling
+from sklearn.compose import make_column_transformer
+from sklearn.compose import make_column_selector
+ct = make_column_transformer((StandardScaler(),make_column_selector(dtype_include=np.number)),[OneHotEncoder(), make_column_selector(dtype_include=object)], remainder = 'passthrough')
+X = ct.fit_transform(dataset)
+
 
 # Encoding the Dependent Variable
 le = LabelEncoder()
@@ -46,10 +41,7 @@ y = le.fit_transform(y)
 # Spliting the datset into Training and Test set
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.15, random_state = 0)
 
-# Feature Scaling
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
+
 
 # Training Logit Reg Model using the Training set
 model = LogisticRegression()
