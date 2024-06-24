@@ -77,8 +77,9 @@ def welcome():
 
 # defining the function which will make the prediction using the data which the user inputs 
 def prediction(AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS):
-    sc = StandardScaler()
-    prediction = model.predict(sc.transform([[AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS]]))
+    #prediction = model.predict(sc.transform([[AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS]]))
+    prediction = model.predict([[AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS]]))
+    print(prediction)
     print(prediction)
     return prediction
   
