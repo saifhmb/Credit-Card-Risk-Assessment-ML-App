@@ -78,9 +78,13 @@ def welcome():
 # defining the function which will make the prediction using the data which the user inputs 
 def prediction(AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS):
     #prediction = model.predict(sc.transform([[AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS]]))
-    prediction = model.predict([[AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS]])
+    dataset = pd.DataFrame([[AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS]], columns = ['AGE', 'INCOME', 'GENDER', 'MARITAL', 'NUMKIDS', 'NUMCARDS', 'HOWPAID', 'MORTGAGE', 'STORECAR', 'LOANS'])
+    ct = make_column_transformer([OneHotEncoder(), make_column_selector(dtype_include=object)], remainder = 'passthrough')
+    X_test = ct.fit_transform(dataset)
+    X_test = sc.transform(X_test)
+    prediction = model.predict(X_test)
     print(prediction)
-    print(prediction)
+    
     return prediction
   
 # this is the main function in which we define our webpage  
