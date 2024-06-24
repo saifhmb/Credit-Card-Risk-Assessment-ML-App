@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import sklearn
+from sklearn.compose import make_column_transformer
+from sklearn.compose import make_column_selector
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder, StandardScaler
@@ -27,10 +29,8 @@ dataset = dataset.drop(['ID'], axis = 1)
 y = dataset.iloc[:, -1].values
 dataset = dataset.drop(['RISK'], axis = 1)
 
-# Encoding the Independent Variables and Applying Feature Scaling
-from sklearn.compose import make_column_transformer
-from sklearn.compose import make_column_selector
-ct = make_column_transformer((StandardScaler(),make_column_selector(dtype_include=np.number)),[OneHotEncoder(), make_column_selector(dtype_include=object)], remainder = 'passthrough')
+# Encoding the Independent Variables 
+ct = make_column_transformer([OneHotEncoder(), make_column_selector(dtype_include=object)], remainder = 'passthrough')
 X = ct.fit_transform(dataset)
 
 
@@ -41,7 +41,10 @@ y = le.fit_transform(y)
 # Spliting the datset into Training and Test set
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.15, random_state = 0)
 
-
+# Feature Scaling
+sc = StandardScaler()
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
 
 # Training Logit Reg Model using the Training set
 model = LogisticRegression()
