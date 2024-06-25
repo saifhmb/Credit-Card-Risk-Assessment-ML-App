@@ -17,4 +17,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push --force https://saifhmb:$HF_TOKEN@huggingface.co/spaces/saifhmb/Credit-Card-Risk-Assessment-ML-App main
+        run: git push https://saifhmb:$HF_TOKEN@huggingface.co/spaces/saifhmb/Credit-Card-Risk-Assessment-ML-App main
