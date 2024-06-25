@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import sklearn
+from sklearn.pipeline import Pipeline
 from sklearn.compose import make_column_transformer
 from sklearn.compose import make_column_selector
 from sklearn.compose import ColumnTransformer
@@ -30,9 +31,18 @@ y = dataset.iloc[:, -1].values
 dataset = dataset.drop(['RISK'], axis = 1)
 
 # Encoding the Independent Variables 
-ct = make_column_transformer([OneHotEncoder(), make_column_selector(dtype_include=object)], remainder = 'passthrough')
-X = ct.fit_transform(dataset)
+categoricalColumns = ['GENDER', 'MARITAL', 'HOWPAID', 'MORTGAGE']
+onehot_categorical = OneHotEncoder(handle_unknown='ignore')
+categorical_transformer = Pipeline(steps = [('onehot', onehot_categorical)])
 
+numericalColumns = dataset.select_dtypes(include = np.number).columns
+sc = StandardScaler()
+numerical_transformer = Pipeline(steps = [('scale', sc)])
+
+preprocessorForCategoricalColumns = ColumnTransformer(transformers=[('cat', categorical_transformer, categoricalColumns)], remainder ='passthrough')
+preprocessorForAllColumns = ColumnTransformer(transformers=[('cat', categorical_transformer, categoricalColumns),('num',numerical_transformer,numericalColumns)],
+                                            remainder="passthrough")
+X = dataset
 
 # Encoding the Dependent Variable
 le = LabelEncoder()
@@ -41,13 +51,9 @@ y = le.fit_transform(y)
 # Spliting the datset into Training and Test set
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.15, random_state = 0)
 
-# Feature Scaling
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
-
 # Training Logit Reg Model using the Training set
-model = LogisticRegression()
+classifier = LogisticRegression()
+model = Pipeline(steps = [('preprocessor', preprocessorForCategoricalColumns),('classifier', classifier)])
 model.fit(X_train, y_train)
 
 # Predicting the Test result
@@ -77,14 +83,10 @@ def welcome():
 
 # defining the function which will make the prediction using the data which the user inputs 
 def prediction(AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS):
-    #prediction = model.predict(sc.transform([[AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS]]))
-    dataset = pd.DataFrame([[AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS]], columns = ['AGE', 'INCOME', 'GENDER', 'MARITAL', 'NUMKIDS', 'NUMCARDS', 'HOWPAID', 'MORTGAGE', 'STORECAR', 'LOANS'])
-    from sklearn.compose import make_column_transformer
-    from sklearn.compose import make_column_selector
-    ct = make_column_transformer((StandardScaler(),make_column_selector(dtype_include=np.number)),[OneHotEncoder(), make_column_selector(dtype_include=object)], remainder = 'passthrough')
-    X_test = ct.fit_transform(dataset)
-    prediction = model.predict(X_test)
+    X = pd.DataFrame([[AGE, INCOME, GENDER, MARITAL, NUMKIDS, NUMCARDS, HOWPAID, MORTGAGE, STORECAR, LOANS]], columns = ['AGE', 'INCOME', 'GENDER', 'MARITAL', 'NUMKIDS', 'NUMCARDS', 'HOWPAID', 'MORTGAGE', 'STORECAR', 'LOANS'])
+    prediction = model.predict(X)
     print(prediction)
+    return prediction
     
     return prediction
   
