@@ -134,7 +134,7 @@ def main():
         if result == 1:
             st.success("The output is {}".format(result) + " which falls under 'bad profit' and thus the customer MAYBE worth issuing a credit card")
         if result == 2:
-            st.success("The output is {}".format(result) + " which falls under 'good risk' and thus the customer worth issuing a credit card")
+            st.success("The output is {}".format(result) + " which falls under 'good risk' and thus the customer is worth issuing a credit card")
 
 if __name__=='__main__': 
     main() 
