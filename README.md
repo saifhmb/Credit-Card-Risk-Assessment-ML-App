@@ -9,7 +9,7 @@ app_file: app.py
 pinned: false
 ---
 # Credit-Card-Risk-Assessment-ML-App
-Hugging Face ML Deployment of Streamlit App for a Credit Card Risk Assessment Model
+Hugging Face ML Deployment of Streamlit App for a Credit Card Risk Assessment Model https://huggingface.co/spaces/saifhmb/Credit-Card-Risk-Assessment-ML-App
 
 # Model description
 
