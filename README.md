@@ -25,7 +25,8 @@ The data preprocessing steps applied include the following:
 - Splitting the dataset into training/test set using 85/15 split ratio
 - Applying feature scaling on all features
 ### Model Plot
-![image](https://github.com/saifhmb/Credit-Card-Risk-Assessment-ML-App/assets/111028776/5c7cc327-bc2a-455f-a00d-1ba89ce9c577)
+![image](https://github.com/saifhmb/Credit-Card-Risk-Assessment-ML-App/assets/111028776/99b017ed-4771-462e-8e15-37e454b983be)
+
 
 
 ## Evaluation Results
@@ -35,10 +36,10 @@ the precision and recall metrics globally by counting the total true positives, 
 
 | Metric    |    Value |
 |-----------|----------|
-| accuracy  | 0.663957 |
-| precision | 0.663957 |
-| recall    | 0.663957 |
+| accuracy  | 0.699187 |
+| precision | 0.699187 |
+| recall    | 0.699187 |
 ### Confusion Matrix
-![image](https://github.com/saifhmb/Credit-Card-Risk-Assessment-ML-App/assets/111028776/4ec794ed-c965-4fd7-81e7-e0246991a58a)
+![image](https://github.com/saifhmb/Credit-Card-Risk-Assessment-ML-App/assets/111028776/66449d90-6a41-4510-93b7-56e496e13140)
 
 
