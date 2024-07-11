@@ -40,7 +40,7 @@ the precision and recall metrics globally by counting the total true positives, 
 | precision | 0.699187 |
 | recall    | 0.699187 |
 
-### Feature Importance
+### Model Explainability
 SHAP was used to determine the important features that helps the model make decisions
 ![image](https://github.com/saifhmb/Credit-Card-Risk-Assessment-ML-App/assets/111028776/b25f372b-f024-4d4c-96b9-187bcdb37a57)
 
