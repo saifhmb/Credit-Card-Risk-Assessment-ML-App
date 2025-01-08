@@ -1,17 +1,6 @@
----
-title: Credit Card Risk Assessment ML App
-emoji: 🏆
-colorFrom: green
-colorTo: indigo
-sdk: streamlit
-sdk_version: 1.36.0
-app_file: app.py
-pinned: false
----
-# Credit-Card-Risk-Assessment-ML-App
-Hugging Face ML Deployment of Streamlit App for a Credit Card Risk Assessment Model https://huggingface.co/spaces/saifhmb/Credit-Card-Risk-Assessment-ML-App
 
-# Model description
+
+# Credit-Card-Risk-Assessment Model Description
 
 This is a logistic regression model trained on customers' credit card risk data in a bank using sklearn library.
 The model predicts whether a customer is worth issuing a credit card or not. The full dataset can be viewed at the following link: https://huggingface.co/datasets/saifhmb/CreditCardRisk
